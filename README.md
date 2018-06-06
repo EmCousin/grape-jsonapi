@@ -8,8 +8,7 @@ Add the `grape` and `grape_fast_jsonapi` gems to Gemfile.
 
 ```ruby
 gem 'grape'
-# gem is not published to rubygems yet
-gem 'grape_fast_jsonapi', git: 'git@github.com:EmCousin/grape_fast_jsonapi.git'
+gem 'grape_fast_jsonapi'
 ```
 
 ## Usage
