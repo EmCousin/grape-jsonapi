@@ -20,6 +20,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'grape'
   gem.add_dependency 'fast_jsonapi'
+  gem.add_dependency 'faker'
 
   gem.add_development_dependency 'rails', '>= 5.0.0'
   gem.add_development_dependency 'rspec'
