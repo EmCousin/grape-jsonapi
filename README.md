@@ -13,8 +13,6 @@ gem 'grape_fast_jsonapi'
 
 ## Usage
 
-### Require grape_fast_jsonapi
-
 ### Tell your API to use Grape::Formatter::FastJsonapi
 
 ```ruby
@@ -52,10 +50,13 @@ end
 # config/initializers/grape_swagger.rb
 GrapeSwagger.model_parsers.register(GrapeSwagger::FastJsonapi::Parser, UserSerializer)
 
+# Your grape API endpoint
 desc 'Get current user',
   success: { code: 200, model: UserSerializer, message: 'The current user' }
 # [...]
 ```
+
+Note that you **need** the `grape-swagger` gem for this to work, otherwise it will throw an error.
 
 ## Credit
 
