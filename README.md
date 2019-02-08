@@ -73,6 +73,7 @@ GrapeSwagger.model_parsers.register(GrapeSwagger::FastJsonapi::Parser, UserSeria
 desc 'Get current user',
   success: { code: 200, model: UserSerializer, message: 'The current user' }
 # [...]
+end
 ```
 
 Note that you **need** the `grape-swagger` gem for this to work, otherwise it will throw an error.
