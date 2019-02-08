@@ -23,7 +23,7 @@ module GrapeSwagger
           schema[:data][:example][:attributes][attribute] = send "#{type}_example"
         end
 
-        relationships_hash = model.relationships_to_serialize
+        relationships_hash = model.relationships_to_serialize || []
 
         relationships_hash.each do |model_type, relationship_data|
           schema[:data][:properties][:relationships][:properties][model_type] = {
