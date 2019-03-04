@@ -13,8 +13,6 @@ gem 'grape_fast_jsonapi'
 
 ## Usage
 
-### Require grape_fast_jsonapi
-
 ### Tell your API to use Grape::Formatter::FastJsonapi
 
 ```ruby
@@ -32,6 +30,33 @@ get "/" do
   render user, include: [:account]
 end
 ```
+
+### Model parser for response documentation
+
+When using Grape with Swagger via [grape-swagger](https://github.com/ruby-grape/grape-swagger), you can generate response documentation automatically via the provided following model parser:
+
+```ruby
+# FastJsonapi serializer example
+# app/serializers/user_serializer.rb
+class UserSerializer
+  include FastJsonapi::ObjectSerializer
+
+  set_type :user
+  has_many :orders
+
+  attributes :name, :email
+end
+
+# config/initializers/grape_swagger.rb
+GrapeSwagger.model_parsers.register(GrapeSwagger::FastJsonapi::Parser, UserSerializer)
+
+# Your grape API endpoint
+desc 'Get current user',
+  success: { code: 200, model: UserSerializer, message: 'The current user' }
+# [...]
+```
+
+Note that you **need** the `grape-swagger` gem for this to work, otherwise it will throw an error.
 
 ## Credit
 

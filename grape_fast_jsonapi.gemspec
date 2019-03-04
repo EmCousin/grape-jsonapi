@@ -19,10 +19,8 @@ Gem::Specification.new do |gem|
   gem.licenses      = ['MIT']
 
   gem.add_dependency 'grape'
-  gem.add_dependency 'fast_jsonapi'
+  gem.add_dependency 'fast_jsonapi', '>= 1.5'
 
-  gem.add_development_dependency 'rails', '>= 5.0.0'
-  gem.add_development_dependency 'rspec'
-  gem.add_development_dependency 'rack-test'
-  gem.add_development_dependency 'rake'
+  gem.add_development_dependency 'rails', '>= 4.2.0'
+  gem.add_development_dependency 'rspec', '~> 3.7'
 end
