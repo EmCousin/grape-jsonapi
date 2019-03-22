@@ -17,8 +17,9 @@ gem 'grape_fast_jsonapi'
 
 ```ruby
 class API < Grape::API
-  format :json
+  content_type :jsonapi, "application/vnd.api+json"
   formatter :json, Grape::Formatter::FastJsonapi
+  formatter :jsonapi, Grape::Formatter::FastJsonapi
 end
 ```
 
