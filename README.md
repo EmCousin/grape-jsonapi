@@ -32,6 +32,24 @@ get "/" do
 end
 ```
 
+### Use a custom serializer
+
+```ruby
+get "/" do
+  user = User.find("123")
+  render user, serializer: 'CustomUserSerializer'
+end
+```
+
+Or
+
+```ruby
+get "/" do
+  user = User.find("123")
+  render CustomUserSerializer.new(user).serialized_json
+end
+```
+
 ### Model parser for response documentation
 
 When using Grape with Swagger via [grape-swagger](https://github.com/ruby-grape/grape-swagger), you can generate response documentation automatically via the provided following model parser:
