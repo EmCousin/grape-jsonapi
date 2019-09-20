@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class User
-  extend ActiveModel::Naming
   include ActiveModel::Serialization
 
   attr_accessor :id, :first_name, :last_name, :password, :email

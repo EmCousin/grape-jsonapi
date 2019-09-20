@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class BlogPost
-  extend ActiveModel::Naming
   include ActiveModel::Serialization
 
   attr_accessor :id, :title, :body

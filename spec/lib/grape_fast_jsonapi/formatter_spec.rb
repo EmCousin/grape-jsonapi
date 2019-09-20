@@ -14,7 +14,8 @@ describe Grape::Formatter::FastJsonapi do
 
     describe '.call' do
       subject { described_class.call(object, env) }
-      let(:env) { {} }
+      let(:fast_jsonapi_options) { nil }
+      let(:env) { { 'fast_jsonapi_options' => fast_jsonapi_options } }
 
       context 'when the object is a string' do
         let(:object) { "I am a string" }
@@ -24,6 +25,7 @@ describe Grape::Formatter::FastJsonapi do
 
       context 'when the object is serializable' do
         let(:user_serializer) { UserSerializer.new(object, {}) }
+        let(:another_user_serializer) { AnotherUserSerializer.new(object, {}) }
         let(:blog_post_serializer) { BlogPostSerializer.new(object, {}) }
 
         context 'when the object is a active serializable model instance' do
@@ -36,17 +38,29 @@ describe Grape::Formatter::FastJsonapi do
           let(:object) { [user, another_user] }
 
           it { is_expected.to eq ::Grape::Json.dump(user_serializer.serializable_hash) }
+        end
 
-          context "when the array contains instances of different models" do
-            let(:object) { [user, blog_post] }
+        context "when the array contains instances of different models" do
+          let(:object) { [user, blog_post] }
 
-            it 'returns an array of jsonapi serialialized objects' do
-              expect(subject).to eq(::Grape::Json.dump([
-                UserSerializer.new(user, {}).serializable_hash,
-                BlogPostSerializer.new(blog_post, {}).serializable_hash
-              ]))
-            end
+          it 'returns an array of jsonapi serialialized objects' do
+            expect(subject).to eq(::Grape::Json.dump([
+              UserSerializer.new(user, {}).serializable_hash,
+              BlogPostSerializer.new(blog_post, {}).serializable_hash
+            ]))
           end
+        end
+
+        context 'when the object is an empty array ' do
+          let(:object) { [] }
+
+          it { is_expected.to eq ::Grape::Json.dump(object) }
+        end
+
+        context 'when the object is an array of null objects ' do
+          let(:object) { [nil, nil] }
+
+          it { is_expected.to eq ::Grape::Json.dump(object) }
         end
 
         context 'when the object is a Hash of plain values' do
@@ -81,6 +95,15 @@ describe Grape::Formatter::FastJsonapi do
           let(:object) { 42 }
 
           it { is_expected.to eq '42' }
+        end
+
+        context 'when a custom serializer is passed as an option' do
+          let(:object) { user }
+          let(:fast_jsonapi_options) { {
+            'serializer' => '::AnotherUserSerializer'
+          } }
+
+          it { is_expected.to eq ::Grape::Json.dump(another_user_serializer.serializable_hash) }
         end
       end
     end

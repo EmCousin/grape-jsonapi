@@ -36,22 +36,32 @@ module Grape
         end
 
         def fast_jsonapi_serializable(object, options)
-          serializable_class(object)&.new(object, options)
+          serializable_class(object, options)&.new(object, options)
         end
 
         def serializable_collection(collection, options)
-          if collection.map(&:model_name).uniq.count > 1
+         if heterogeneous_collection?(collection)
             collection.map do |o|
               fast_jsonapi_serializable(o, options).serializable_hash || o.map(&:serializable_hash)
             end
           else
-            fast_jsonapi_serializable(collection, options).serializable_hash || collection.map(&:serializable_hash)
+            fast_jsonapi_serializable(collection, options)&.serializable_hash || collection.map(&:serializable_hash)
           end
         end
 
-        def serializable_class(object)
-          object = object.first if object.is_a?(Array)
-          (object.model_name.name + 'Serializer').safe_constantize
+        def heterogeneous_collection?(collection)
+          collection.map { |item| item.class.name }.uniq.size > 1
+        end
+
+        def serializable_class(object, options)
+          klass_name = options['serializer'] || options[:serializer]
+          klass_name ||= begin
+            object = object.first if object.is_a?(Array)
+
+            object.class.name + 'Serializer'
+          end
+
+          klass_name&.safe_constantize
         end
 
         def serialize_each_pair(object, env)

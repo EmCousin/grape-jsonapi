@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails'
 require 'fast_jsonapi'
 require 'grape'
 require 'grape_fast_jsonapi/endpoint_extension'
