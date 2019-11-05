@@ -67,7 +67,7 @@ module GrapeSwagger
 
       def map_active_record_columns_to_attributes
         activerecord_model = model.record_type.to_s.camelize.safe_constantize
-        return map_model_attributes unless activerecord_model&.is_a?(ActiveRecord::Base)
+        return map_model_attributes unless activerecord_model && activerecord_model < ActiveRecord::Base
 
         columns = activerecord_model.columns.select do |c|
           c.name.to_sym.in?(model.attributes_to_serialize.keys)
@@ -172,6 +172,10 @@ module GrapeSwagger
 
       def boolean_example
         [true, false].sample
+      end
+
+      def uuid_example
+        SecureRandom.uuid
       end
     end
   end
