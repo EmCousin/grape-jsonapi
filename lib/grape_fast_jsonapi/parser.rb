@@ -15,9 +15,9 @@ module GrapeSwagger
         schema = default_schema
 
         attributes_hash = if (defined? ActiveRecord)
-                      map_active_record_columns_to_attributes
+                      map_model_attributes.symbolize_keys.merge(map_active_record_columns_to_attributes)
                     else
-                      map_model_attributes
+                      map_model_attributes.symbolize_keys
                     end
 
         attributes_hash.each do |attribute, type|
@@ -35,6 +35,8 @@ module GrapeSwagger
           }
           schema[:data][:example][:relationships][model_type] = relationships_example(relationships_attributes)
         end
+
+        schema.deep_merge!(model.additional_schema) if model.respond_to? :additional_schema
 
         schema
       end
@@ -84,7 +86,12 @@ module GrapeSwagger
       def map_model_attributes
         attributes = {}
         (model.attributes_to_serialize || []).each do |attribute, _|
-          attributes[attribute] = :string
+          attributes[attribute] =
+            if model.respond_to? :attribute_types
+              model.attribute_types[attribute] || :string
+            else
+              :string
+            end
         end
         attributes
       end
