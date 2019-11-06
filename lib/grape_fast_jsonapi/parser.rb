@@ -15,7 +15,7 @@ module GrapeSwagger
         schema = default_schema
 
         attributes_hash = if (defined? ActiveRecord)
-                      map_model_attributes.symbolize_keys.merge(map_active_record_columns_to_attributes)
+                      map_model_attributes.symbolize_keys.merge(map_active_record_columns_to_attributes.symbolize_keys)
                     else
                       map_model_attributes.symbolize_keys
                     end
