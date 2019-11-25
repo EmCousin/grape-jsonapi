@@ -27,6 +27,10 @@ module GrapeSwagger
 
         relationships_hash = model.relationships_to_serialize || []
 
+        # If relationship has :key set different than association name, it should be rendered under that key
+        relationships_hash =
+          relationships_hash.each_with_object({}) { |(_relationship_name, relationship), accu| accu[relationship.key] = relationship }
+
         relationships_hash.each do |model_type, relationship_data|
           relationships_attributes = relationship_data.instance_values.symbolize_keys
           schema[:data][:properties][:relationships][:properties][model_type] = {
