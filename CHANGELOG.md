@@ -1,13 +1,16 @@
 ## Changelog
 
-### v0.2.2 (Next)
+### v0.2.3 (Next)
 
 * Your contribution here.
+
+### v0.2.2 (December 12, 2019)
+
+* Fixed low severity vulnerabiliy issue with `loofah` dependency
 
 ### v0.2.1 (September 18, 2019)
 
 * [#12](https://github.com/EmCousin/grape_fast_jsonapi/pull/12) - Removed call to `rails` and fixed a potential security issue
-
 
 ### v0.2.0 (February 8, 2019)
 
