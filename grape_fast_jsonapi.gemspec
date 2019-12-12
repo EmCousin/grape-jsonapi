@@ -18,9 +18,9 @@ Gem::Specification.new do |gem|
   gem.version       = Grape::FastJsonapi::VERSION
   gem.licenses      = ['MIT']
 
-  gem.add_dependency 'grape', '~> 1.2'
-  gem.add_dependency 'fast_jsonapi', '~> 1.5'
+  gem.add_dependency 'grape'
+  gem.add_dependency 'fast_jsonapi', '>= 1.5'
 
-  gem.add_development_dependency 'rails', '~> 4.2.0'
+  gem.add_development_dependency 'rails', '>= 4.2.0'
   gem.add_development_dependency 'rspec', '~> 3.7'
 end
