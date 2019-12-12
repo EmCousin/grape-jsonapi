@@ -1,8 +1,12 @@
 ## Changelog
 
-### v0.2.3 (Next)
+### v0.2.4 (Next)
 
 * Your contribution here.
+
+### v0.2.3 (December 12, 2019)
+
+* Reverted v0.2.2 and bumped `loofah` using `dependabot`
 
 ### v0.2.2 (December 12, 2019)
 
