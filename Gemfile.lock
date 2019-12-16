@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    grape_fast_jsonapi (0.2.3)
+    grape_fast_jsonapi (0.2.4)
       fast_jsonapi (>= 1.5)
       grape
 
