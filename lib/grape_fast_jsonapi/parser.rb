@@ -83,7 +83,7 @@ module GrapeSwagger
 
       def map_model_attributes
         attributes = {}
-        model.attributes_to_serialize.each do |attribute, _|
+        (model.attributes_to_serialize || []).each do |attribute, _|
           attributes[attribute] = :string
         end
         attributes
