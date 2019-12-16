@@ -4,7 +4,7 @@
 
 * Your contribution here.
 
-### v0.2.4 (December 12, 2019)
+### v0.2.4 (December 16, 2019)
 
 * [#15](https://github.com/EmCousin/grape_fast_jsonapi/pull/15) - Handle serializers which don't have any attributes - [@vesan](https://github.com/vesan)
 
