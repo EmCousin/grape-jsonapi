@@ -11,6 +11,9 @@ describe Grape::Formatter::FastJsonapi do
     let(:blog_post) do
       BlogPost.new(id: 1, title: "Blog Post title", body: "Blog post body")
     end
+    let(:admin) do
+      UserAdmin.new(id: 1, first_name: 'Jean Luc', last_name: 'Picard', password: 'supersecretpassword', email: 'jeanluc@picard.com')
+    end
 
     describe '.call' do
       subject { described_class.call(object, env) }
@@ -27,6 +30,11 @@ describe Grape::Formatter::FastJsonapi do
         let(:user_serializer) { UserSerializer.new(object, {}) }
         let(:another_user_serializer) { AnotherUserSerializer.new(object, {}) }
         let(:blog_post_serializer) { BlogPostSerializer.new(object, {}) }
+
+        context 'when the object has a model_name defined' do
+          let(:object) { admin }
+          it { is_expected.to eq ::Grape::Json.dump(user_serializer.serializable_hash) }
+        end
 
         context 'when the object is a active serializable model instance' do
           let(:object) { user }
