@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/EmCousin/grape_fast_jsonapi/tree/master.svg?style=svg)](https://circleci.com/gh/EmCousin/grape_fast_jsonapi/tree/master)
+
 # Grape::FastJsonapi
 
 Use [fast_jsonapi](https://github.com/Netflix/fast_jsonapi) with [Grape](https://github.com/ruby-grape/grape).
