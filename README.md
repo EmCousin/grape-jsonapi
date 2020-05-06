@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/EmCousin/grape_fast_jsonapi/tree/master.svg?style=svg)](https://circleci.com/gh/EmCousin/grape_fast_jsonapi/tree/master)
+
 # Grape::FastJsonapi
 
 Use [fast_jsonapi](https://github.com/Netflix/fast_jsonapi) with [Grape](https://github.com/ruby-grape/grape).
@@ -56,8 +58,11 @@ When using Grape with Swagger via [grape-swagger](https://github.com/ruby-grape/
 
 ```ruby
 # FastJsonapi serializer example
+
+# app/serializers/base_serializer.rb
+class BaseSerializer; end
 # app/serializers/user_serializer.rb
-class UserSerializer
+class UserSerializer < BaseSerializer
   include FastJsonapi::ObjectSerializer
 
   set_type :user
@@ -67,12 +72,13 @@ class UserSerializer
 end
 
 # config/initializers/grape_swagger.rb
-GrapeSwagger.model_parsers.register(GrapeSwagger::FastJsonapi::Parser, UserSerializer)
+GrapeSwagger.model_parsers.register(GrapeSwagger::FastJsonapi::Parser, BaseSerializer)
 
 # Your grape API endpoint
-desc 'Get current user',
-  success: { code: 200, model: UserSerializer, message: 'The current user' }
+desc 'Get current user' do
+  success code: 200, model: UserSerializer, message: 'The current user'
 # [...]
+end
 ```
 
 Note that you **need** the `grape-swagger` gem for this to work, otherwise it will throw an error.

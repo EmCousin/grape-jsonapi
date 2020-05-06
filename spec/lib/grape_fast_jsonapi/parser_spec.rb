@@ -161,6 +161,54 @@ describe GrapeSwagger::FastJsonapi::Parser do
           )
         end
       end
+
+      context 'when the serializer doesn\'t have any attributes' do
+        let(:model) { AnotherBlogPostSerializer } # no attributes
+
+        it 'return a hash defining the schema with empty attributes' do
+          expect(subject).to eq({
+            data: {
+              type: :object,
+              properties: {
+                id: { type: :integer },
+                type: { type: :string },
+                attributes: {
+                  type: :object,
+                  properties: {}
+                },
+                relationships: {
+                  type: :object,
+                  properties: {
+                    user: {
+                      properties: {
+                        data: {
+                          properties: {
+                            id: { type: :integer },
+                            type: { type: :string }
+                          },
+                          type: :object,
+                        }
+                      },
+                      type: :object,
+                    }
+                  }
+                }
+              },
+              example: {
+                id: 1,
+                type: :blog_post,
+                attributes: {
+                },
+                relationships: {
+                  user: {
+                    data: { id: 1, type: :user }
+                  }
+                }
+              }
+            }
+          })
+        end
+      end
     end
   end
 end

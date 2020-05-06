@@ -58,7 +58,7 @@ module Grape
           klass_name ||= begin
             object = object.first if object.is_a?(Array)
 
-            object.class.name + 'Serializer'
+            (object.try(:model_name) || object.class).name + 'Serializer'
           end
 
           klass_name&.safe_constantize
