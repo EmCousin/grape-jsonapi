@@ -76,7 +76,7 @@ module GrapeSwagger
         return map_model_attributes unless activerecord_model && activerecord_model < ActiveRecord::Base
 
         columns = activerecord_model.columns.select do |c|
-          c.name.to_sym.in?(model.attributes_to_serialize.keys)
+          model.attributes_to_serialize.keys.include?(c.name.to_sym)
         end
 
         attributes = {}
