@@ -22,7 +22,12 @@ module GrapeSwagger
 
         attributes_hash.each do |attribute, type|
           schema[:data][:properties][:attributes][:properties][attribute] = { type: type }
-          schema[:data][:example][:attributes][attribute] = send "#{type}_example"
+          example_method = "#{type}_example"
+          unless self.respond_to?(example_method, true)
+            puts "WARN unexpected type encountered, missing #{example_method}  --use string example instead"
+            example_method = "string_example"
+          end
+          schema[:data][:example][:attributes][attribute] = send example_method
         end
 
         relationships_hash = model.relationships_to_serialize || []
@@ -156,6 +161,14 @@ module GrapeSwagger
         else
           "Example string"
         end
+      end
+
+      def citext_example
+        text_example
+      end
+
+      def float_example
+        rand() * rand(1..100)
       end
 
       def date_example
