@@ -2,7 +2,6 @@
 require 'active_record'
 
 class DbRecord < ActiveRecord::Base
-
   def self.columns
     [
       # adhering to the ActiveRecord::ConnectionAdapters::Column contract

@@ -161,6 +161,7 @@ describe GrapeSwagger::FastJsonapi::Parser do
           )
         end
       end
+
       context 'when the serializer doesn\'t have any attributes' do
         let(:model) { AnotherBlogPostSerializer } # no attributes
 
