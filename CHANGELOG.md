@@ -10,6 +10,10 @@
 
 Note : This PR fixes a bug when serializing a ActiveRecord::Relation instance, the formatter was looking for a formatter `ActiveRecord::RelationSerializer` serializer that doesn't exist, insteafd of looking for the serializer corresponding to its model name.
 
+* [#14](https://github.com/EmCousin/grape_fast_jsonapi/pull/14) and [#21](https://github.com/EmCousin/grape_fast_jsonapi/pull/21) - Fixes to swagger parser: Respect `:key` setting, fix column type rendering, allow adding to schema - [@vincentvanbush](https://github.com/vincentvanbush) and [@nathanvda](https://github.com/nathanvda)
+
+* Security updates
+
 ### v0.2.4 (December 16, 2019)
 
 * [#15](https://github.com/EmCousin/grape_fast_jsonapi/pull/15) - Handle serializers which don't have any attributes - [@vesan](https://github.com/vesan)
