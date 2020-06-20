@@ -1,16 +1,18 @@
 ## Changelog
 
-### v0.2.6 (Next)
+### v0.2.7 (Next)
 
 * Your contribution here.
+
+### v0.2.6 (June 20, 2020)
+
+* [#14](https://github.com/EmCousin/grape_fast_jsonapi/pull/14) and [#21](https://github.com/EmCousin/grape_fast_jsonapi/pull/21) - Fixes to swagger parser: Respect `:key` setting, fix column type rendering, allow adding to schema - [@vincentvanbush](https://github.com/vincentvanbush) and [@nathanvda](https://github.com/nathanvda)
 
 ### v0.2.5 (January 23, 2020)
 
 * [#18](https://github.com/EmCousin/grape_fast_jsonapi/pull/18) - Revert to model_name instead of class-name - [@dblommesteijn](https://github.com/dblommesteijn)
 
 Note : This PR fixes a bug when serializing a ActiveRecord::Relation instance, the formatter was looking for a formatter `ActiveRecord::RelationSerializer` serializer that doesn't exist, insteafd of looking for the serializer corresponding to its model name.
-
-* [#14](https://github.com/EmCousin/grape_fast_jsonapi/pull/14) and [#21](https://github.com/EmCousin/grape_fast_jsonapi/pull/21) - Fixes to swagger parser: Respect `:key` setting, fix column type rendering, allow adding to schema - [@vincentvanbush](https://github.com/vincentvanbush) and [@nathanvda](https://github.com/nathanvda)
 
 * Security updates
 
