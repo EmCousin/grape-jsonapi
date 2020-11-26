@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class BlogPostSerializer
-  include FastJsonapi::ObjectSerializer
+  include JSONAPI::Serializer
 
   belongs_to :user
 

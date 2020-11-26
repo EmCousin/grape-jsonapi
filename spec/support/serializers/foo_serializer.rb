@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class FooSerializer
-  include FastJsonapi::ObjectSerializer
+  include JSONAPI::Serializer
 
   belongs_to :bar, key: :foo_bar
   has_one :fizz, key: :foo_fizz

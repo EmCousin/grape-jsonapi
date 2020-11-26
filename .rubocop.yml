@@ -1,0 +1,14 @@
+require:
+  - rubocop-performance
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - spec/**/*
+  TargetRubyVersion: 2.6
+
+Metrics/ClassLength:
+  Max: 150
+
+Documentation:
+  Enabled: false

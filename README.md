@@ -1,27 +1,27 @@
-[![CircleCI](https://circleci.com/gh/EmCousin/grape_fast_jsonapi/tree/master.svg?style=svg)](https://circleci.com/gh/EmCousin/grape_fast_jsonapi/tree/master)
+[![CircleCI](https://circleci.com/gh/EmCousin/grape_jsonapi/tree/master.svg?style=svg)](https://circleci.com/gh/EmCousin/grape_fast_jsonapi/tree/master)
 
-# Grape::FastJsonapi
+# Grape::Jsonapi
 
-Use [fast_jsonapi](https://github.com/Netflix/fast_jsonapi) with [Grape](https://github.com/ruby-grape/grape).
+Use [jsonapi-serializer](https://github.com/jsonapi-serializer/jsonapi-serializer) with [Grape](https://github.com/ruby-grape/grape).
 
 ## Installation
 
-Add the `grape` and `grape_fast_jsonapi` gems to Gemfile.
+Add the `grape` and `grape_jsonapi` gems to Gemfile.
 
 ```ruby
 gem 'grape'
-gem 'grape_fast_jsonapi'
+gem 'grape_jsonapi'
 ```
 
 ## Usage
 
-### Tell your API to use Grape::Formatter::FastJsonapi
+### Tell your API to use Grape::Formatter::Jsonapi
 
 ```ruby
 class API < Grape::API
   content_type :jsonapi, "application/vnd.api+json"
-  formatter :json, Grape::Formatter::FastJsonapi
-  formatter :jsonapi, Grape::Formatter::FastJsonapi
+  formatter :json, Grape::Formatter::Jsonapi
+  formatter :jsonapi, Grape::Formatter::Jsonapi
 end
 ```
 
@@ -63,7 +63,7 @@ When using Grape with Swagger via [grape-swagger](https://github.com/ruby-grape/
 class BaseSerializer; end
 # app/serializers/user_serializer.rb
 class UserSerializer < BaseSerializer
-  include FastJsonapi::ObjectSerializer
+  include JSONAPI::Serializer
 
   set_type :user
   has_many :orders
@@ -72,7 +72,7 @@ class UserSerializer < BaseSerializer
 end
 
 # config/initializers/grape_swagger.rb
-GrapeSwagger.model_parsers.register(GrapeSwagger::FastJsonapi::Parser, BaseSerializer)
+GrapeSwagger.model_parsers.register(GrapeSwagger::Jsonapi::Parser, BaseSerializer)
 
 # Your grape API endpoint
 desc 'Get current user' do

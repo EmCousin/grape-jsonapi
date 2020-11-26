@@ -1,7 +1,8 @@
 ## Changelog
 
-### v0.2.7 (Next)
+### v1.0.0 (November 21, 2021)
 
+#### Breaking changes
 * Your contribution here.
 
 ### v0.2.6 (June 20, 2020)
