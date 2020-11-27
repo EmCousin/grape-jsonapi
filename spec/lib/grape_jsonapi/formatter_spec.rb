@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe Grape::Formatter::FastJsonapi do
+describe Grape::Formatter::Jsonapi do
   describe 'class methods' do
     let(:user) do
       User.new(id: 1, first_name: 'Chuck', last_name: 'Norris', password: 'supersecretpassword', email: 'chuck@norris.com')
@@ -9,7 +9,7 @@ describe Grape::Formatter::FastJsonapi do
       User.new(id: 2, first_name: 'Bruce', last_name: 'Lee', password: 'supersecretpassword', email: 'bruce@lee.com')
     end
     let(:blog_post) do
-      BlogPost.new(id: 1, title: "Blog Post title", body: "Blog post body")
+      BlogPost.new(id: 1, title: 'Blog Post title', body: 'Blog post body')
     end
     let(:admin) do
       UserAdmin.new(id: 1, first_name: 'Jean Luc', last_name: 'Picard', password: 'supersecretpassword', email: 'jeanluc@picard.com')
@@ -17,11 +17,11 @@ describe Grape::Formatter::FastJsonapi do
 
     describe '.call' do
       subject { described_class.call(object, env) }
-      let(:fast_jsonapi_options) { nil }
-      let(:env) { { 'fast_jsonapi_options' => fast_jsonapi_options } }
+      let(:jsonapi_serializer_options) { nil }
+      let(:env) { { 'jsonapi_serializer_options' => jsonapi_serializer_options } }
 
       context 'when the object is a string' do
-        let(:object) { "I am a string" }
+        let(:object) { 'I am a string' }
 
         it { is_expected.to eq object }
       end
@@ -48,14 +48,14 @@ describe Grape::Formatter::FastJsonapi do
           it { is_expected.to eq ::Grape::Json.dump(user_serializer.serializable_hash) }
         end
 
-        context "when the array contains instances of different models" do
+        context 'when the array contains instances of different models' do
           let(:object) { [user, blog_post] }
 
           it 'returns an array of jsonapi serialialized objects' do
             expect(subject).to eq(::Grape::Json.dump([
-              UserSerializer.new(user, {}).serializable_hash,
-              BlogPostSerializer.new(blog_post, {}).serializable_hash
-            ]))
+                                                       UserSerializer.new(user, {}).serializable_hash,
+                                                       BlogPostSerializer.new(blog_post, {}).serializable_hash
+                                                     ]))
           end
         end
 
@@ -87,9 +87,9 @@ describe Grape::Formatter::FastJsonapi do
 
           it 'returns an hash of with jsonapi serialialized objects values' do
             expect(subject).to eq(::Grape::Json.dump({
-              user: UserSerializer.new(user, {}).serializable_hash,
-              blog_post: BlogPostSerializer.new(blog_post, {}).serializable_hash
-            }))
+                                                       user: UserSerializer.new(user, {}).serializable_hash,
+                                                       blog_post: BlogPostSerializer.new(blog_post, {}).serializable_hash
+                                                     }))
           end
         end
 
@@ -107,9 +107,11 @@ describe Grape::Formatter::FastJsonapi do
 
         context 'when a custom serializer is passed as an option' do
           let(:object) { user }
-          let(:fast_jsonapi_options) { {
-            'serializer' => '::AnotherUserSerializer'
-          } }
+          let(:jsonapi_serializer_options) do
+            {
+              'serializer' => '::AnotherUserSerializer'
+            }
+          end
 
           it { is_expected.to eq ::Grape::Json.dump(another_user_serializer.serializable_hash) }
         end

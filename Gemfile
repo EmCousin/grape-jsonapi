@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 gemspec
 
 gem 'grape'
-gem 'fast_jsonapi'
+gem 'jsonapi-serializer'

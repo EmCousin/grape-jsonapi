@@ -1,8 +1,18 @@
 ## Changelog
 
-### v0.2.7 (Next)
+### v1.0.1 (next)
 
 * Your contribution here.
+
+### v1.0.0 (November 21, 2021)
+
+[#14](https://github.com/EmCousin/grape_fast_jsonapi/pull/14) - [@EmCousin](https://github.com/EmCousin)
+
+* Changed dependency from [fast_jsonapi](https://github.com/Netflix/fast_jsonapi) to [jsonapi-serializer](https://github.com/jsonapi-serializer/jsonapi-serializer)
+* Deprecated `Grape::Formatter::FastJsonapi` and `Grape::FastJsonapi::Parser` in favor to `Grape::Formatter::Jsonapi` and `Grape::Jsonapi::Parser`. Will be removed in v1.1
+* Fixed bugs due to breaking changes caused by the switch
+* Added and configured Rubocop
+* Security updates
 
 ### v0.2.6 (June 20, 2020)
 

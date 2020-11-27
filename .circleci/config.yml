@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
     # specify the version you desire here
-       - image: circleci/ruby:2.6.3-node-browsers
+       - image: circleci/ruby:2.6.6-node-browsers
          environment:
            RAILS_ENV: test
            PGHOST: 127.0.0.1
@@ -51,6 +51,11 @@ jobs:
                             --out /tmp/test-results/rspec.xml \
                             --format progress \
                             $TEST_FILES
+
+      - run:
+          name: run rubocop
+          command: |
+            bundle exec rubocop
 
       # collect reports
       - store_test_results:

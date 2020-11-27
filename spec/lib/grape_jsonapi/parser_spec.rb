@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe GrapeSwagger::FastJsonapi::Parser do
+describe GrapeSwagger::Jsonapi::Parser do
   let(:model) { BlogPostSerializer }
   let(:endpoint) { '/' }
 
@@ -51,8 +51,8 @@ describe GrapeSwagger::FastJsonapi::Parser do
               id: 1,
               type: :blog_post,
               attributes: {
-                title: "Example string",
-                body: "Example string",
+                title: 'Example string',
+                body: 'Example string'
               },
               relationships: {
                 user: {
@@ -82,7 +82,7 @@ describe GrapeSwagger::FastJsonapi::Parser do
                   properties: {
                     first_name: { type: :string },
                     last_name: { type: :string },
-                    email: { type: :string },
+                    email: { type: :string }
                     # password: { type: :string }, FILTERED
                   }
                 },
@@ -111,9 +111,9 @@ describe GrapeSwagger::FastJsonapi::Parser do
                 id: 1,
                 type: :user,
                 attributes: {
-                  first_name: "Example string",
-                  last_name: "Example string",
-                  email: "Example string",
+                  first_name: 'Example string',
+                  last_name: 'Example string',
+                  email: 'Example string'
                   # password: "Example string", FILTERED
                 },
                 relationships: {
@@ -186,10 +186,10 @@ describe GrapeSwagger::FastJsonapi::Parser do
                             id: { type: :integer },
                             type: { type: :string }
                           },
-                          type: :object,
+                          type: :object
                         }
                       },
-                      type: :object,
+                      type: :object
                     }
                   }
                 }

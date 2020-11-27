@@ -3,7 +3,7 @@
 require 'active_record'
 
 class DbRecordSerializer
-  include FastJsonapi::ObjectSerializer
+  include JSONAPI::Serializer
 
   attributes(
     :string_attribute,

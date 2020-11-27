@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AnotherUserSerializer
-  include FastJsonapi::ObjectSerializer
+  include JSONAPI::Serializer
 
   attributes :email
 end

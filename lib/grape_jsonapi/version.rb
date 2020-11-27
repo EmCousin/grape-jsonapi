@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Grape
-  module FastJsonapi
-    VERSION = '0.2.6'.freeze
+  module Jsonapi
+    VERSION = '1.0.0'
   end
 end
