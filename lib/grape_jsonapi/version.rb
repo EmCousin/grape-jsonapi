@@ -2,6 +2,6 @@
 
 module Grape
   module Jsonapi
-    VERSION = '1.0.0'.freeze
+    VERSION = '1.0.0'
   end
 end
