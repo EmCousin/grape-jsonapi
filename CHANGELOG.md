@@ -4,7 +4,7 @@
 
 * Your contribution here.
 
-### v1.0.0 (November 21, 2021)
+### v1.0.0 (November 21, 2020)
 
 [#14](https://github.com/EmCousin/grape_fast_jsonapi/pull/14) - [@EmCousin](https://github.com/EmCousin)
 
