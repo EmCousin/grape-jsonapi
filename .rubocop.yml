@@ -10,5 +10,5 @@ AllCops:
 Metrics/ClassLength:
   Max: 150
 
-Documentation:
+Style/Documentation:
   Enabled: false
