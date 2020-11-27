@@ -8,6 +8,7 @@
 
 [#14](https://github.com/EmCousin/grape_fast_jsonapi/pull/14) - [@EmCousin](https://github.com/EmCousin)
 
+* renamed gem from `grape_fast_jsonapi` to `grape-jsonapi`
 * Changed dependency from [fast_jsonapi](https://github.com/Netflix/fast_jsonapi) to [jsonapi-serializer](https://github.com/jsonapi-serializer/jsonapi-serializer)
 * Deprecated `Grape::Formatter::FastJsonapi` and `Grape::FastJsonapi::Parser` in favor to `Grape::Formatter::Jsonapi` and `Grape::Jsonapi::Parser`. Will be removed in v1.1
 * Fixed bugs due to breaking changes caused by the switch
