@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/EmCousin/grape_jsonapi/tree/master.svg?style=svg)](https://circleci.com/gh/EmCousin/grape_fast_jsonapi/tree/master)
+[![CircleCI](https://circleci.com/gh/EmCousin/grape-jsonapi/tree/master.svg?style=svg)](https://circleci.com/gh/EmCousin/grape-jsonapi/tree/master)
 
 # Grape::Jsonapi
 
