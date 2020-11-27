@@ -6,11 +6,11 @@ Use [jsonapi-serializer](https://github.com/jsonapi-serializer/jsonapi-serialize
 
 ## Installation
 
-Add the `grape` and `grape_jsonapi` gems to Gemfile.
+Add the `grape` and `grape-jsonapi` gems to Gemfile.
 
 ```ruby
 gem 'grape'
-gem 'grape_jsonapi'
+gem 'grape-jsonapi'
 ```
 
 ## Usage
