@@ -35,7 +35,7 @@ module Grape
         end
 
         def serializable_collection?(object)
-          object.respond_to?(:to_a) && object.all? do |o|
+          object && object.respond_to?(:to_a) && object.all? do |o|
             o.respond_to?(:serializable_hash)
           end
         end
