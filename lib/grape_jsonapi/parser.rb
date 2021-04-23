@@ -94,9 +94,10 @@ module GrapeSwagger
         return map_model_attributes unless activerecord_model && activerecord_model < ActiveRecord::Base
 
         activerecord_model.columns.each_with_object({}) do |column, attributes|
-          next unless model.attributes_to_serialize.key?(column.name.to_sym)
-          if model.respond_to?(:attribute_types) && model.attribute_types[column.name]
-            attributes[column.name] = model.attribute_types[column.name]
+          attribute = column.name.to_sym
+          next unless model.attributes_to_serialize.key?(attribute)
+          if model.respond_to?(:attribute_types) && model.attribute_types[attribute]
+            attributes[column.name] = model.attribute_types[attribute]
           else
             attributes[column.name] = column.type
           end
