@@ -95,8 +95,11 @@ module GrapeSwagger
 
         activerecord_model.columns.each_with_object({}) do |column, attributes|
           next unless model.attributes_to_serialize.key?(column.name.to_sym)
-
-          attributes[column.name] = column.type
+          if model.respond_to? :attribute_types && model.attribute_types[attribute]
+            attributes[column.name] = model.attribute_types[attribute]
+          else
+            attributes[column.name] = column.type
+          end
         end
       end
 
