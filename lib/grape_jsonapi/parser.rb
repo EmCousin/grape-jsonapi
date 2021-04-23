@@ -96,7 +96,7 @@ module GrapeSwagger
         activerecord_model.columns.each_with_object({}) do |column, attributes|
           next unless model.attributes_to_serialize.key?(column.name.to_sym)
           if model.respond_to?(:attribute_types) && model.attribute_types[attribute]
-            attributes[column.name] = model.attribute_types[attribute]
+            attributes[column.name] = model.attribute_types[column.name]
           else
             attributes[column.name] = column.type
           end
