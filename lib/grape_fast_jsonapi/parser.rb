@@ -188,6 +188,14 @@ module GrapeSwagger
       def uuid_example
         SecureRandom.uuid
       end
+
+      def float_example
+        if defined? Faker
+          Faker::Number.decimal
+        else
+          rand(1..9999) / 10.0
+        end
+      end
     end
   end
 end
