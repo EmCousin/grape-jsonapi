@@ -51,6 +51,16 @@ get "/" do
 end
 ```
 
+### Override `meta`and `links` properties
+
+`meta` and `links` properties are usually defined per resource within your serializer ([here](https://github.com/jsonapi-serializer/jsonapi-serializer#meta-per-resource) and [here](https://github.com/jsonapi-serializer/jsonapi-serializer#links-per-object))
+
+However, you may need to override those properties by passing them as option when rendering your response:
+```ruby
+user = User.find("123")
+render user, meta: { pagination: { page: 1, total: 42 } }, links: { self: 'https://my-awesome.app.com/users/1' }
+```
+
 ### Model parser for response documentation
 
 When using Grape with Swagger via [grape-swagger](https://github.com/ruby-grape/grape-swagger), you can generate response documentation automatically via the provided following model parser:
