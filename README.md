@@ -55,7 +55,7 @@ end
 
 `meta` and `links` properties are usually defined per resource within your serializer ([here](https://github.com/jsonapi-serializer/jsonapi-serializer#meta-per-resource) and [here](https://github.com/jsonapi-serializer/jsonapi-serializer#links-per-object))
 
-However, you may need to override those properties by passing them as option when rendering your response:
+However, if you need to override those properties, you can pass them as options when rendering your response:
 ```ruby
 user = User.find("123")
 render user, meta: { pagination: { page: 1, total: 42 } }, links: { self: 'https://my-awesome.app.com/users/1' }
