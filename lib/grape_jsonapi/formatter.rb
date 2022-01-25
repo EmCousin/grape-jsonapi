@@ -24,17 +24,17 @@ module Grape
         def serialize(object, env)
           if object.respond_to?(:serializable_hash)
             serializable_object(object, jsonapi_options(env)).serializable_hash
-          elsif serializable_collection?(object)
-            serializable_collection(object, env)
           elsif object.is_a?(Hash)
             serialize_each_pair(object, env)
+          elsif serializable_collection?(object)
+            serializable_collection(object, env)
           else
             object
           end
         end
 
         def serializable_collection?(object)
-          object.respond_to?(:to_a) && object.any? && object.all? do |o|
+          !object.nil? && object.respond_to?(:to_a) && object.any? && object.all? do |o|
             o.respond_to?(:serializable_hash)
           end
         end
