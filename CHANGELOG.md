@@ -1,8 +1,17 @@
 ## Changelog
 
-### v1.0.1 (next)
+### v1.0.2 (next)
 
 * Your contribution here.
+
+### v1.0.1 (January 25, 2022)
+
+[#32](https://github.com/EmCousin/grape-jsonapi/pull/32) - [@EmCousin](https://github.com/EmCousin)
+
+* The gem now forces API response to have a JSONAPI compliant format, even for objects that are not being serialized via a `JSONAPI::Serializer`
+* You can now customize the `meta` and `links` properties of your response at rendering time, without having to rely on your serializers (check README.md for more information)
+* Changed the response's data structure when the object is a heterogeneous collection (a list of objects of different classes), to make it JSONAPI compliant.
+* Fixed a defect that was causing empty hashes to be rendered as empty arrays
 
 ### v1.0.0 (November 21, 2020)
 

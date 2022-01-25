@@ -5,11 +5,10 @@ module Grape
     module Jsonapi
       class << self
         def call(object, env)
-          return object if object.is_a?(String)
-          return ::Grape::Json.dump(serialize(object, env)) if serializable?(object)
-          return object.to_json if object.respond_to?(:to_json)
-
-          ::Grape::Json.dump(object)
+          response = serializable?(object) ? serialize(object, env) : { data: object }
+          ::Grape::Json.dump(
+            response.merge(env.slice('meta', 'links'))
+          )
         end
 
         private
@@ -25,17 +24,17 @@ module Grape
         def serialize(object, env)
           if object.respond_to?(:serializable_hash)
             serializable_object(object, jsonapi_options(env)).serializable_hash
-          elsif serializable_collection?(object)
-            serializable_collection(object, jsonapi_options(env))
           elsif object.is_a?(Hash)
             serialize_each_pair(object, env)
+          elsif serializable_collection?(object)
+            serializable_collection(object, env)
           else
             object
           end
         end
 
         def serializable_collection?(object)
-          object.respond_to?(:to_a) && object.all? do |o|
+          !object.nil? && object.respond_to?(:to_a) && object.any? && object.all? do |o|
             o.respond_to?(:serializable_hash)
           end
         end
@@ -48,13 +47,13 @@ module Grape
           serializable_class(object, options)&.new(object, options)
         end
 
-        def serializable_collection(collection, options)
+        def serializable_collection(collection, env)
           if heterogeneous_collection?(collection)
-            collection.map do |o|
-              serialize_resource(o, options)
+            collection.each_with_object({ data: [] }) do |o, hash|
+              hash[:data].push(serialize_resource(o, env)[:data])
             end
           else
-            serialize_resource(collection, options)
+            serialize_resource(collection, env)
           end
         end
 
@@ -62,8 +61,10 @@ module Grape
           collection.map { |item| item.class.name }.uniq.many?
         end
 
-        def serialize_resource(resource, options)
-          jsonapi_serializable(resource, options)&.serializable_hash || resource.map(&:serializable_hash)
+        def serialize_resource(resource, env)
+          jsonapi_serializable(resource, jsonapi_options(env))&.serializable_hash || resource.map do |item|
+            serialize(item, env)
+          end
         end
 
         def serializable_class(object, options)
@@ -78,8 +79,15 @@ module Grape
         end
 
         def serialize_each_pair(object, env)
-          h = {}
-          object.each_pair { |k, v| h[k] = serialize(v, env) }
+          h = { data: {} }
+          object.each_pair do |k, v|
+            serialized_value = serialize(v, env)
+            h[:data][k] = if serialized_value.is_a?(Hash) && serialized_value[:data]
+                            serialized_value[:data]
+                          else
+                            serialized_value
+                          end
+          end
           h
         end
 
