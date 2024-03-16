@@ -106,7 +106,7 @@ module GrapeSwagger
 
       def map_model_attributes
         attributes = {}
-        (model.attributes_to_serialize || []).each do |attribute, _|
+        (model.attributes_to_serialize || []).each_key do |attribute|
           attributes[attribute] =
             if model.respond_to? :attribute_types
               model.attribute_types[attribute] || :string

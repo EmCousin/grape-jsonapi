@@ -12,7 +12,6 @@ Gem::Specification.new do |gem|
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
   gem.files         = `git ls-files`.split("\n")
-  gem.test_files    = `git ls-files -- {test,spec}/*`.split("\n")
   gem.name          = 'grape-jsonapi'
   gem.require_paths = ['lib']
   gem.version       = Grape::Jsonapi::VERSION
@@ -23,7 +22,5 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'grape'
   gem.add_dependency 'jsonapi-serializer'
 
-  gem.add_development_dependency 'rails', '>= 4.2.0'
-  gem.add_development_dependency 'rspec', '~> 3.7'
-  gem.add_development_dependency 'rubocop'
+  gem.metadata['rubygems_mfa_required'] = 'true'
 end
