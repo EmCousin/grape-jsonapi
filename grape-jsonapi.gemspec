@@ -17,7 +17,7 @@ Gem::Specification.new do |gem|
   gem.version       = Grape::Jsonapi::VERSION
   gem.licenses      = ['MIT']
 
-  gem.required_ruby_version = '>= 2.6.0'
+  gem.required_ruby_version = '>= 3.2.0'
 
   gem.add_dependency 'grape'
   gem.add_dependency 'jsonapi-serializer'

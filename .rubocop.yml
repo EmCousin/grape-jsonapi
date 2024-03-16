@@ -6,7 +6,7 @@ AllCops:
   NewCops: enable
   Exclude:
     - spec/**/*
-  TargetRubyVersion: 2.6
+  TargetRubyVersion: 3.2
 
 Metrics/ClassLength:
   Max: 150

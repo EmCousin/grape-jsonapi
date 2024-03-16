@@ -47,7 +47,7 @@ module GrapeSwagger
 
       def enrich_with_attributes(schema)
         attributes_hash.each do |attribute, type|
-          schema[:data][:properties][:attributes][:properties][attribute] = { type: type }
+          schema[:data][:properties][:attributes][:properties][attribute] = { type: }
           example_method = "#{type}_example"
           unless respond_to?(example_method, true)
             puts "WARN unexpected type encountered, missing #{example_method}  --use string example instead"
@@ -144,7 +144,7 @@ module GrapeSwagger
 
         data = [data] if relationship_data[:relationship_type] == :has_many
 
-        { data: data }
+        { data: }
       end
 
       def integer_example
