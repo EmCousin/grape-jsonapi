@@ -21,11 +21,13 @@ module Grape
           serializable_collection?(object)
         end
 
-        def serialize(object, env)
+        def serialize(object, env) # rubocop:disable Metrics/MethodLength
           if object.respond_to?(:serializable_hash)
             serializable_object(object, jsonapi_options(env)).serializable_hash
           elsif object.is_a?(Hash)
             serialize_each_pair(object, env)
+          elsif object.respond_to?(:to_a) && object.to_a.empty?
+            serialize_empty_array(object, env)
           elsif serializable_collection?(object)
             serializable_collection(object, env)
           else
@@ -34,13 +36,19 @@ module Grape
         end
 
         def serializable_collection?(object)
-          !object.nil? && object.respond_to?(:to_a) && object.any? && object.all? do |o|
-            o.respond_to?(:serializable_hash)
-          end
+          return false unless object.is_a?(Enumerable)
+          return false unless object.respond_to?(:to_a)
+          return false unless object.any?
+
+          object.all? { |o| o.respond_to?(:serializable_hash) }
         end
 
         def serializable_object(object, options)
           jsonapi_serializable(object, options) || object
+        end
+
+        def serialize_empty_array(_object, _env)
+          { data: [] }
         end
 
         def jsonapi_serializable(object, options)
@@ -79,8 +87,7 @@ module Grape
         end
 
         def serialize_each_pair(object, env)
-          h = { data: {} }
-          object.each_pair do |k, v|
+          object.each_with_object({ data: {} }) do |(k, v), h|
             serialized_value = serialize(v, env)
             h[:data][k] = if serialized_value.is_a?(Hash) && serialized_value[:data]
                             serialized_value[:data]
@@ -88,7 +95,6 @@ module Grape
                             serialized_value
                           end
           end
-          h
         end
 
         def jsonapi_options(env)

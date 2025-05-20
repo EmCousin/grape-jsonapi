@@ -10,7 +10,7 @@ module GrapeSwagger
           Use Grape::Jsonapi::Parser instead
         "
 
-        super(model, endpoint)
+        super
       end
 
       def self.deprecated?
