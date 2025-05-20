@@ -13,7 +13,7 @@ module Grape
             Use Grape::Formatter::Jsonapi instead
           "
 
-          super(object, env)
+          super
         end
 
         def deprecated?

@@ -3,6 +3,14 @@
 module GrapeSwagger
   module Jsonapi
     class Parser
+      RELATIONSHIP_DEFAULT_ITEM = {
+        type: :object,
+        properties: {
+          id: { type: :integer },
+          type: { type: :string }
+        }
+      }.freeze
+
       attr_reader :model, :endpoint
 
       def initialize(model, endpoint)
@@ -125,14 +133,6 @@ module GrapeSwagger
           items: RELATIONSHIP_DEFAULT_ITEM
         } }
       end
-
-      RELATIONSHIP_DEFAULT_ITEM = {
-        type: :object,
-        properties: {
-          id: { type: :integer },
-          type: { type: :string }
-        }
-      }.freeze
 
       def relationships_example(relationship_data)
         data = {
